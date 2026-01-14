@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import hidden_4
+import hidden_4 # type: ignore
 
 if __name__ == "__main__":
     
