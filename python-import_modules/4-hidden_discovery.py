@@ -1,11 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import hidden_4
 
 if __name__ == "__main__":
 
-    name = dir(hidden_4)
-    sortedName = sorted(name)
-    for nameList in sortedName:
-        if nameList.startswith("__"):
+    names = dir(hidden_4)
+    names_alpha = sorted(names)
+    for name in names_alpha:
+        if name.startswith("__"):
             continue
-        print(nameList)
+        print(name)
