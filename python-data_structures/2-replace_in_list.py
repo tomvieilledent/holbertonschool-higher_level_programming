@@ -2,7 +2,7 @@
 def replace_in_list(my_list, idx, element):
     i = len(my_list)
     if idx < 0 or idx >= i:
-        pass
+        return my_list
     else:
         my_list[idx] = element
         return my_list
