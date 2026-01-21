@@ -17,6 +17,5 @@ def list_division(my_list_1, my_list_2, list_length):
             result = 0
         finally:
             new_list.append(result)
-            i += 1
 
     return new_list
