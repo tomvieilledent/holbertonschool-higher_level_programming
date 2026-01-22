@@ -4,6 +4,9 @@ def matrix_divided(matrix, div):
         raise ZeroDivisionError("division by zero")
     elif not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
+    for i in range(len(matrix)):
+        if len(matrix[0]) != len(matrix[i]):
+            raise TypeError("Each row of the matrix must have the same size")
 
     new_matrix = list(map(lambda row: list(
         map(lambda x: round(x / div, 2), row)), matrix))
