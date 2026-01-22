@@ -1,16 +1,29 @@
 #!/usr/bin/python3
 def matrix_divided(matrix, div):
+
+    # Vérification division par zero
     if div == 0:
         raise ZeroDivisionError("division by zero")
+
+    # Vérification si div est un int ou un float
     if not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
+
+    # Vérification si matrix et row sont des listes
     if not isinstance(matrix, list):
-        raise TypeError("matrix must be a matrix (array of arrays of integers/floats)")
+        raise TypeError(
+            "matrix must be a matrix (array of arrays of integers/floats)")
+    for row in matrix:
+        if not isinstance(row, list):
+            raise TypeError(
+                "matrix must be a matrix (array of arrays of integers/floats)")
+
+    # Vérification si toutes les lignes de matrix on le meme nombre d'elements
     for i in range(len(matrix)):
         if len(matrix[0]) != len(matrix[i]):
             raise TypeError("Each row of the matrix must have the same size")
-    
 
+    # Crée une nouvelle matrice, la divise et arrondi au centième
     new_matrix = list(map(lambda row: list(
         map(lambda x: round(x / div, 2), row)), matrix))
 
