@@ -33,19 +33,19 @@ def matrix_divided(matrix, div):
     # Check that matrix is a non-empty list
     if not isinstance(matrix, list):
         raise TypeError(
-            "matrix must be a matrix (array of arrays of integers/floats)")
+            "matrix must be a matrix (list of lists) of integers/floats")
     
     # Check that each row of the matrix is a list
     for row in matrix:
         if not isinstance(row, list):
             raise TypeError(
-                "matrix must be a matrix (array of arrays of integers/floats)")
+                "matrix must be a matrix (list of lists) of integers/floats")
         
         # Check that each element in each row is a number
         for element in row:
             if not isinstance(element, (int, float)):
                 raise TypeError(
-                    "matrix must be a matrix (array of arrays of integers/floats)")
+                    "matrix must be a matrix (list of lists) of integers/floats")
 
     # Check that all rows have the same number of elements
     for i in range(len(matrix)):
