@@ -31,10 +31,8 @@ Test present: cannot convert float NaN to integer
     ValueError: cannot convert float NaN to integer
 
 Test present: missing one argument
-    >>> add_integer("hello")
-    Traceback (most recent call last):
-    ...
-    TypeError: a must be an integer
+    >>> add_integer(2)
+    100
 
 Test present: missing two arguments
     >>> add_integer()
