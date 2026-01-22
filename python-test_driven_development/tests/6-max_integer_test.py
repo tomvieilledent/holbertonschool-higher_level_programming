@@ -19,7 +19,18 @@ class TestMaxInteger(unittest.TestCase):
     def test_one_number(self):
         """Test with only one number"""
         self.assertEqual(max_integer([5]), 5)
+    
+    def test_max_begenning(self):
+        """Max at the begenning"""
+        self.assertEqual(max_integer([3, 2, 1]), 3)
 
+    def test_max_middle(self):
+        """Max in the middle"""
+        self.assertEqual(max_integer([1, 3, 1]), 3)
+
+    def test_only_negative(self):
+        """Only negative numbers in the list"""
+        self.assertEqual(max_integer([-1, -2, -3]), -1)
 
 if __name__ == '__main__':
     unittest.main()
