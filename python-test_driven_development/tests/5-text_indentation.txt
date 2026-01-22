@@ -40,6 +40,16 @@ Test present: text with spaces around special characters
     <BLANKLINE>
     End
 
+Test present: text with multiple spaces after special characters
+    >>> text_indentation("Hello.   How are you?     I am fine:     great!")
+    Hello.
+    <BLANKLINE>
+    How are you?
+    <BLANKLINE>
+    I am fine:
+    <BLANKLINE>
+    great!
+
 Test present: text is not a string => TypeError: text must be a string
     >>> text_indentation(123)
     Traceback (most recent call last):
