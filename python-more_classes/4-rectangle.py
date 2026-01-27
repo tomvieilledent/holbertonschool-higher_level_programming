@@ -35,3 +35,20 @@ class Rectangle:
         if heightValue < 0:
             raise ValueError("height must be >= 0")
         self.__height = heightValue
+
+    def area(self):
+        area = self.__width * self.__height
+        return area
+
+    def perimeter(self):
+        if self.__width == 0 or self.__height == 0:
+            return 0
+        return ((self.__width + self.__height) * 2)
+
+    def __str__(self):
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        return "\n".join(["#" * self.__width for _ in range(self.__height)])
+
+    def __repr__(self):
+        return f"Rectangle({self.__width}, {self.__height})"
