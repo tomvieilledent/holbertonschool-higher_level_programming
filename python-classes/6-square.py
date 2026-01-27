@@ -5,26 +5,17 @@ This module defines a Square class with size, position, area, and print function
 
 class Square:
     """
-    Represents a square with size, position, area calculation, and print functionality.
+    Square class with private size and position attributes, validation, area calculation, and print method.
     """
     def __init__(self, size=0, position=(0, 0)):
         """
-        Initializes a new Square instance with the given size and position.
+        Initialize a new Square instance with the given size and position.
         Args:
-            size: The size of the square (integer, default 0).
-            position: The position of the square (tuple of 2 positive integers, default (0, 0)).
-        Raises:
-            TypeError: If size is not an integer or position is not a tuple of 2 positive integers.
-            ValueError: If size is less than 0.
+            size (int): The size of the square (default 0).
+            position (tuple): The position of the square (default (0, 0)).
         """
-        if not isinstance(size, int):
-            raise TypeError("size must be an integer")
-        if size < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = size
-        if not isinstance(position, tuple) or not len(position) == 2 or not all(isinstance(x, int) for x in position):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        self.__position = position
+        self.size = size
+        self.position = position
 
     # Define the new square position
     @property
@@ -34,7 +25,7 @@ class Square:
     # Set the new square position
     @position.setter
     def position(self, positionValue):
-        if not isinstance(self.__position, tuple) or not len(self.__position) == 2 or not all(isinstance(x, int) for x in self.__position):
+        if not isinstance(positionValue, tuple) or not len(positionValue) == 2 or not all(isinstance(x, int) for x in positionValue):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = positionValue
 

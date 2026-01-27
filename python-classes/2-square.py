@@ -5,13 +5,13 @@ This module defines a Square class with size validation.
 
 class Square:
     """
-    Represents a square with size validation.
+    Square class with private size attribute and validation.
     """
     def __init__(self, size=0):
         """
-        Initializes a new Square instance with the given size.
+        Initialize a new Square instance with the given size.
         Args:
-            size: The size of the square (integer, default 0).
+            size (int): The size of the square (default 0).
         Raises:
             TypeError: If size is not an integer.
             ValueError: If size is less than 0.
