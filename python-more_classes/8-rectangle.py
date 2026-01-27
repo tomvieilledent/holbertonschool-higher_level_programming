@@ -1,10 +1,20 @@
 #!/usr/bin/python3
+"""
+This module defines a Rectangle class with a static method to compare rectangles.
+"""
+
 class Rectangle:
+    """
+    Represents a rectangle and provides a static method to compare two rectangles by area.
+    """
     number_of_instances = 0
     print_symbol = '#'
 
 
     def __init__(self, width=0, height=0):
+        """
+        Initializes a new Rectangle instance.
+        """
         if not isinstance(width, int):
             raise TypeError("width must be an integer")
         if not isinstance(height, int):

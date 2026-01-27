@@ -1,6 +1,16 @@
 #!/usr/bin/python3
+"""
+This module defines a Rectangle class with private width and height attributes.
+"""
+
 class Rectangle:
+    """
+    Represents a rectangle with private width and height attributes.
+    """
     def __init__(self, width=0, height=0):
+        """
+        Initializes a new Rectangle instance with optional width and height.
+        """
         if not isinstance(width, int):
             raise TypeError("width must be an integer")
         if not isinstance(height, int):

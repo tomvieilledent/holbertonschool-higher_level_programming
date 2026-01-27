@@ -17,39 +17,65 @@ class Square:
         self.size = size
         self.position = position
 
-    # Define the new square position
     @property
     def position(self):
+        """
+        Retrieve the position of the square.
+        Returns:
+            tuple: The position of the square.
+        """
         return self.__position
 
-    # Set the new square position
     @position.setter
     def position(self, positionValue):
+        """
+        Set the position of the square with validation.
+        Args:
+            positionValue (tuple): The new position of the square.
+        Raises:
+            TypeError: If positionValue is not a tuple of 2 positive integers.
+        """
         if not isinstance(positionValue, tuple) or not len(positionValue) == 2 or not all(isinstance(x, int) for x in positionValue):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = positionValue
 
-    # Define the new square size
     @property
     def size(self):
+        """
+        Retrieve the size of the square.
+        Returns:
+            int: The size of the square.
+        """
         return self.__size
 
-    # Set the new square size
     @size.setter
     def size(self, sizeValue):
+        """
+        Set the size of the square with validation.
+        Args:
+            sizeValue (int): The new size of the square.
+        Raises:
+            TypeError: If sizeValue is not an integer.
+            ValueError: If sizeValue is less than 0.
+        """
         if not isinstance(sizeValue, int):
             raise TypeError("size must be an integer")
         if sizeValue < 0:
             raise ValueError("size must be >= 0")
         self.__size = sizeValue
 
-    # Return the new area of the square
     def area(self):
-        area = self.__size ** 2
-        return area
+        """
+        Compute and return the area of the square.
+        Returns:
+            int: The area of the square.
+        """
+        return self.__size ** 2
 
-    # Print a square with "z" size at the (x,y) position
     def my_print(self):
+        """
+        Print the square with '#' characters at the given position. Prints an empty line if size is 0.
+        """
         if self.__size == 0:
             print()
         else:

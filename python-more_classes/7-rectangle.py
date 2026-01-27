@@ -1,10 +1,19 @@
 #!/usr/bin/python3
+"""
+This module defines a Rectangle class with a customizable print symbol.
+"""
+
 class Rectangle:
+    """
+    Represents a rectangle that can be printed with a custom symbol.
+    """
     number_of_instances = 0
     print_symbol = '#'
 
-
     def __init__(self, width=0, height=0):
+        """
+        Initializes a new Rectangle instance with a customizable print symbol.
+        """
         if not isinstance(width, int):
             raise TypeError("width must be an integer")
         if not isinstance(height, int):
@@ -62,4 +71,4 @@ class Rectangle:
         print("Bye rectangle...")
         Rectangle.number_of_instances -= 1
 
-    
+

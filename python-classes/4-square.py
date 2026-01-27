@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """
-This module defines a Square class with size validation, area calculation, and property accessors.
+This module defines a Square class with size validation and area calculation.
 """
 
 class Square:
     """
-    Square class with private size attribute, validation, area calculation, and property accessors.
+    Square class with private size attribute, validation, and area method.
     """
     def __init__(self, size=0):
         """

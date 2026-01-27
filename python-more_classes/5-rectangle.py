@@ -1,6 +1,16 @@
 #!/usr/bin/python3
+"""
+This module defines a Rectangle class that detects instance deletion.
+"""
+
 class Rectangle:
+    """
+    Represents a rectangle and prints a message when an instance is deleted.
+    """
     def __init__(self, width=0, height=0):
+        """
+        Initializes a new Rectangle instance with width and height.
+        """
         if not isinstance(width, int):
             raise TypeError("width must be an integer")
         if not isinstance(height, int):
