@@ -7,7 +7,7 @@ position, area, and print functionality.
 
 class Square:
     """
-    Square class with private size and position attributes,
+    Square class with private size and position attributes, 
     validation, area calculation, and print method.
     """
 
