@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 """
-This module defines a Rectangle class with official string representation.
+This module defines a Rectangle class with
+official string representation.
 """
 
 
 class Rectangle:
     """
-    Represents a rectangle with __str__ and __repr__ methods for string representations.
+    Represents a rectangle with __str__ and __repr__
+    methods for string representations.
     """
 
     def __init__(self, width=0, height=0):

@@ -1,18 +1,21 @@
 #!/usr/bin/python3
 """
-This module defines a Rectangle class that tracks the number of instances.
+This module defines a Rectangle class that
+tracks the number of instances.
 """
 
 
 class Rectangle:
     """
-    Represents a rectangle and keeps track of the number of instances.
+    Represents a rectangle and keeps track
+    of the number of instances.
     """
     number_of_instances = 0
 
     def __init__(self, width=0, height=0):
         """
-        Initializes a new Rectangle instance and increments the instance counter.
+        Initializes a new Rectangle instance and
+        increments the instance counter.
         """
         if not isinstance(width, int):
             raise TypeError("width must be an integer")
