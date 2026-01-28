@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """
-This module defines a Square class with size, 
+This module defines a Square class with size,
 position, area, and print functionality.
 """
 
 
 class Square:
     """
-    Square class with private size and position attributes, 
+    Square class with private size and position attributes,
     validation, area calculation, and print method.
     """
 
@@ -84,8 +84,8 @@ class Square:
         """
         if self.__size == 0:
             print()
-        else:
-            print(("\n" * self.__position[1]), end="")
-        for i in range(self.__size):
-            print(" " * self.__position[0], end="")
-            print("#" * self.__size)
+            return
+        for _ in range(self.__position[1]):
+            print()
+        for _ in range(self.__size):
+            print(" " * self.__position[0] + "#" * self.__size)
