@@ -3,10 +3,12 @@
 This module defines a Square class with size validation.
 """
 
+
 class Square:
     """
     Square class with private size attribute and validation.
     """
+
     def __init__(self, size=0):
         """
         Initialize a new Square instance with the given size.

@@ -3,6 +3,7 @@
 This module defines a Rectangle class with a customizable print symbol.
 """
 
+
 class Rectangle:
     """
     Represents a rectangle that can be printed with a custom symbol.
@@ -70,5 +71,3 @@ class Rectangle:
     def __del__(self):
         print("Bye rectangle...")
         Rectangle.number_of_instances -= 1
-
-

@@ -3,10 +3,12 @@
 This module defines a Square class with size, position, area, and print functionality.
 """
 
+
 class Square:
     """
     Square class with private size and position attributes, validation, area calculation, and print method.
     """
+
     def __init__(self, size=0, position=(0, 0)):
         """
         Initialize a new Square instance with the given size and position.

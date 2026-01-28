@@ -3,10 +3,12 @@
 This module defines a Rectangle class that detects instance deletion.
 """
 
+
 class Rectangle:
     """
     Represents a rectangle and prints a message when an instance is deleted.
     """
+
     def __init__(self, width=0, height=0):
         """
         Initializes a new Rectangle instance with width and height.
@@ -62,6 +64,6 @@ class Rectangle:
 
     def __repr__(self):
         return f"Rectangle({self.__width}, {self.__height})"
-    
+
     def __del__(self):
         print("Bye rectangle...")

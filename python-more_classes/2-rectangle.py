@@ -3,10 +3,12 @@
 This module defines a Rectangle class with width and height validation.
 """
 
+
 class Rectangle:
     """
     Represents a rectangle with validated width and height.
     """
+
     def __init__(self, width=0, height=0):
         """
         Initializes a new Rectangle instance with width and height validation.

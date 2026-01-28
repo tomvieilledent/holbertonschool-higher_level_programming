@@ -3,13 +3,13 @@
 This module defines a Rectangle class with a static method to compare rectangles.
 """
 
+
 class Rectangle:
     """
     Represents a rectangle and provides a static method to compare two rectangles by area.
     """
     number_of_instances = 0
     print_symbol = '#'
-
 
     def __init__(self, width=0, height=0):
         """
@@ -71,7 +71,7 @@ class Rectangle:
     def __del__(self):
         print("Bye rectangle...")
         Rectangle.number_of_instances -= 1
-    
+
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
         if not isinstance(rect_1, Rectangle):

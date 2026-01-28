@@ -3,10 +3,12 @@
 This module defines a Rectangle class with area, perimeter, and string representation.
 """
 
+
 class Rectangle:
     """
     Represents a rectangle with methods to compute area, perimeter, and display as a string.
     """
+
     def __init__(self, width=0, height=0):
         """
         Initializes a new Rectangle instance with width and height.

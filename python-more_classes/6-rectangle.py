@@ -3,6 +3,7 @@
 This module defines a Rectangle class that tracks the number of instances.
 """
 
+
 class Rectangle:
     """
     Represents a rectangle and keeps track of the number of instances.
