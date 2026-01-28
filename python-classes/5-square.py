@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 """
-This module defines a Square class with size validation, area calculation, and print functionality.
+This module defines a Square class with size validation,
+area calculation, and print functionality.
 """
 
 
 class Square:
     """
-    Square class with private size attribute, validation, area calculation, and print method.
+    Square class with private size attribute,
+    validation, area calculation, and print method.
     """
 
     def __init__(self, size=0):
@@ -52,7 +54,8 @@ class Square:
 
     def my_print(self):
         """
-        Print the square with '#' characters. Prints an empty line if size is 0.
+        Print the square with '#' characters.
+        Prints an empty line if size is 0.
         """
         if self.__size == 0:
             print()
