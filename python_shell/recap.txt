@@ -1,0 +1,279 @@
+================================================================================
+                    RECAP - SIMPLE SHELL EN PYTHON
+                    Structure et fonctionnement détaillé
+================================================================================
+
+=== ARCHITECTURE GÉNÉRALE ===
+
+Le shell Python est organisé en 4 modules principaux :
+1. hsh.py      -> Point d'entrée et boucle principale
+2. shell.py    -> Gestion de l'I/O et des signaux
+3. executor.py -> Exécution des commandes (dispatcher)
+4. builtin_cmds.py -> Implémentation des commandes intégrées
+
+================================================================================
+
+1. HSH.PY (Point d'entrée principal)
+====================================
+
+Responsabilité : Orchestrer le shell
+- Importe les modules shell, executor
+- Configure les signaux avec setup_signal()
+- Lance la boucle principale qui :
+  * Affiche le prompt
+  * Lit l'entrée utilisateur
+  * Nettoie (strip) la ligne
+  * Exécute la commande
+  * Boucle jusqu'à EOF (Ctrl+D)
+
+Flux : hsh.py → shell.py (I/O) + executor.py (exécution)
+
+================================================================================
+
+2. SHELL.PY (Gestion I/O et signaux)
+=====================================
+
+Responsabilité : Interaction avec l'utilisateur et gestion des signaux
+
+Fonctions :
+
+display_prompt()
+  - Affiche "$ " AVANT de lire (contrairement au C)
+  - Vérifie si stdin est un terminal avec sys.stdin.isatty()
+  - Utilise sys.stdout.write() + flush() pour synchronisation
+
+read_line()
+  - Lit une ligne avec input()
+  - Retourne None à EOF (permet au walrus operator := de détecter la fin)
+  - Sur EOF + terminal interactif : affiche "\n"
+  - Gère l'exception EOFError
+
+handle_sigint(s, f)
+  - Callback pour Ctrl+C (SIGINT)
+  - Affiche "\n$ " pour créer un nouveau prompt
+  - Flush pour affichage immédiat
+
+setup_signal()
+  - Enregistre le handler SIGINT
+  - signal.signal(signal.SIGINT, handle_sigint)
+
+Flux : Clavier → input() → read_line() → hsh.py
+
+================================================================================
+
+3. EXECUTOR.PY (Dispatcher des commandes)
+==========================================
+
+Responsabilité : Déterminer le type de commande et l'exécuter
+
+execute_command(line, envp=os.environ)
+  Entrée : line = "ls -la /tmp"
+
+  1. Split la ligne en argv : ["ls", "-la", "/tmp"]
+  2. Retourne 0 si argv est vide
+  3. Extrait cmd = argv[0]
+
+  4. Teste si c'est une commande intégrée :
+     if is_builtin(cmd): 
+       → Appelle execute_builtin() depuis builtin_cmds.py
+       → Retourne le code de retour
+
+  5. Teste si cmd contient "/" (chemin absolu ou relatif) :
+     if "/" in cmd:
+       - os.access(cmd, os.X_OK) vérifie si exécutable
+       - subprocess.run() exécute le programme
+       - Retourne le code de retour
+       - Sinon affiche erreur "not found"
+
+  6. Cherche la commande dans PATH :
+     for d in envp.get("PATH", "").split(":"):
+       - Construit le chemin complet : full = d/cmd
+       - os.access(full, os.X_OK) vérifie si exécutable
+       - subprocess.run() exécute si trouvé
+       - Retourne le code de retour
+
+  7. Si pas trouvé partout :
+     - Affiche "./hsh: 1: {cmd}: not found"
+     - Retourne 127 (code d'erreur standard)
+
+Flux : line → argv split → [builtin|absolute|PATH search] → returncode
+
+================================================================================
+
+4. BUILTIN_CMDS.PY (Commandes intégrées)
+=========================================
+
+Responsabilité : Implémentation des commandes qui ne passent pas par subprocess
+
+Commandes implémentées :
+
+cmd_exit(argv)
+  - sys.exit(0) : Quitte le shell immédiatement
+  - Pas de subprocess, c'est du code Python pur
+
+cmd_env(argv, envp)
+  - Affiche toutes les variables d'environnement
+  - Boucle sur envp.items() : os.environ par défaut
+  - Format : KEY=VALUE (une par ligne)
+  - Retourne 0
+
+cmd_cd(argv, envp)
+  - Change le répertoire courant : os.chdir()
+  - Syntaxe : cd [répertoire]
+  - Si pas d'argument : cd HOME
+  - Gère IndexError (pas d'arg) et OSError (dossier inexistant)
+  - Affiche message d'erreur en stderr
+  - Retourne 0 si succès, 1 si erreur
+
+cmd_chmod(argv)
+  - Change les permissions des fichiers : os.chmod()
+  - Syntaxe : chmod MODE fichier1 [fichier2 ...]
+  - MODE en octal (ex: 755, 644)
+  - int(argv[1], 8) convertit octal → décimal
+  - Applique à chaque fichier en argv[2:]
+  - Gère ValueError (mode invalide) et OSError (fichier inexistant)
+  - Retourne 0 si succès, 1 si erreur
+
+BUILTINS = { dictionnaire }
+  - Mappe les noms de commandes aux fonctions
+  - {"exit": cmd_exit, "env": cmd_env, ...}
+
+is_builtin(cmd)
+  - Teste si cmd est dans BUILTINS
+  - Retourne True/False
+
+execute_builtin(cmd, argv, envp=None)
+  - Dispatcher qui appelle la bonne fonction builtin
+  - Gère les paramètres spéciaux (env, cd nécessitent envp)
+  - Retourne le code de retour de la fonction
+
+Flux : cmd → is_builtin() → execute_builtin() → cmd_xxx() → returncode
+
+================================================================================
+
+5. FLUX GLOBAL D'EXÉCUTION
+===========================
+
+Exemple : utilisateur tape "ls -la"
+
+1. hsh.py:display_prompt() → affiche "$ "
+2. hsh.py:read_line() → "ls -la"
+3. hsh.py:line.strip() → "ls -la" (nettoyage)
+4. hsh.py:execute_command("ls -la")
+   
+   5. executor.py:execute_command()
+      - argv = ["ls", "-la"]
+      - cmd = "ls"
+      - is_builtin("ls") → False
+      - "/" not in "ls" → False
+      - cherche dans PATH
+        - /bin/ls trouvé
+        - subprocess.run(["/bin/ls", "-la"])
+        - retourne 0
+   
+6. hsh.py:boucle continue (walrus operator)
+7. goto step 1
+
+================================================================================
+
+EXEMPLE 2 : utilisateur tape "cd /tmp"
+
+1. hsh.py:display_prompt() → affiche "$ "
+2. hsh.py:read_line() → "cd /tmp"
+3. hsh.py:execute_command("cd /tmp")
+   
+   5. executor.py:execute_command()
+      - argv = ["cd", "/tmp"]
+      - cmd = "cd"
+      - is_builtin("cd") → True
+      - execute_builtin("cd", ["cd", "/tmp"], os.environ)
+      
+      4. builtin_cmds.py:cmd_cd()
+         - os.chdir("/tmp")
+         - retourne 0
+   
+6. Le répertoire courant a changé !
+7. hsh.py:boucle continue
+8. goto step 1
+
+================================================================================
+
+OPTIMISATIONS APPLIQUÉES
+=========================
+
+1. Walrus operator := 
+   while (line := read_line()) is not None:
+   - Lit ET teste l'EOF en une seule expression
+
+2. List comprehension pour env :
+   [print(f"{k}={v}") for k, v in envp.items()]
+   - Plus compact qu'une boucle for classique
+
+3. Opérateurs ternaires :
+   argv[1] if len(argv) > 1 else envp.get("HOME", "/")
+   - Gestion des arguments par défaut
+
+4. Dictionary pour BUILTINS :
+   Facilite l'ajout/modification de commandes
+
+5. Modules séparés :
+   - Responsabilité unique pour chaque fichier
+   - Facilite la maintenance et les tests
+   - Pas d'imbrication de fonctions
+
+6. os.access(path, os.X_OK) :
+   - Vérifie l'exécutabilité sans essayer d'exécuter
+
+7. subprocess.run() :
+   - Gère fork + execve automatiquement
+   - Plus simple que les appels systèmes C
+
+================================================================================
+
+DIFFÉRENCES AVEC LA VERSION C
+==============================
+
+C Version                       Python Version
+=========================================
+fork() + execve()              subprocess.run()
+getline()                      input()
+strtok()                       str.split()
+access(X_OK)                   os.access(X_OK)
+write() syscall                sys.stdout.write()
+malloc/free                    Automatic GC
+strdup() + parsing PATH        str.split(":")
+isatty(STDIN_FILENO)           sys.stdin.isatty()
+signal()                       signal.signal()
+Gestion argc/argv              sys.argv
+
+================================================================================
+
+CODES DE RETOUR
+================
+
+0   : Succès
+1   : Erreur (cd, chmod échoué)
+127 : Commande non trouvée
+N   : Code de retour de la commande exécutée
+
+================================================================================
+
+GESTION D'ERREURS
+==================
+
+- Chemin invalide : "Error: No such file or directory"
+- Chmod mode invalide : ValueError → message stderr
+- Commande introuvable : "./hsh: 1: cmd: not found"
+- EOF (Ctrl+D) : Boucle s'arrête naturellement
+- Ctrl+C (SIGINT) : Affiche "\n$ " et continue
+
+================================================================================
+
+VARIABLES D'ENVIRONNEMENT
+==========================
+
+- $HOME : Défaut pour cd
+- $PATH : Liste des répertoires à chercher
+- Tous les envp passés via subprocess.run(env=envp)
+
+================================================================================
