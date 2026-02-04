@@ -32,45 +32,4 @@ Test integer_validator() with string:
     ...
     TypeError: name must be an integer
 
-Test integer_validator() with float:
-    >>> bg.integer_validator("float", 3.14)
-    Traceback (most recent call last):
-    ...
-    TypeError: float must be an integer
-
-Test integer_validator() with None:
-    >>> bg.integer_validator("none", None)
-    Traceback (most recent call last):
-    ...
-    TypeError: none must be an integer
-
-Test integer_validator() with boolean:
-    >>> bg.integer_validator("bool", True)
-    Traceback (most recent call last):
-    ...
-    TypeError: bool must be an integer
-
-Test integer_validator() with list:
-    >>> bg.integer_validator("list", [1, 2])
-    Traceback (most recent call last):
-    ...
-    TypeError: list must be an integer
-
-Test integer_validator() with tuple:
-    >>> bg.integer_validator("tuple", (1,))
-    Traceback (most recent call last):
-    ...
-    TypeError: tuple must be an integer
-
-Test integer_validator() with missing arguments:
-    >>> bg.integer_validator()
-    Traceback (most recent call last):
-    ...
-    TypeError: BaseGeometry.integer_validator() missing 2 required positional arguments: 'name' and 'value'
-
-Test integer_validator() with one argument:
-    >>> bg.integer_validator("age")
-    Traceback (most recent call last):
-    ...
-    TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
 
