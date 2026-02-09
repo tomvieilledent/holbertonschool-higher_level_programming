@@ -6,3 +6,8 @@ __pycache__/
 # Test main files
 *main.py
 *main.c
+
+# Text files in python-input_output (not subdirectories)
+python-input_output/*.txt
+python-input_output/*.json
+python-input_output/8-my_class*
