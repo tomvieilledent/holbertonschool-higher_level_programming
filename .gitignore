@@ -11,3 +11,9 @@ __pycache__/
 python-input_output/*.txt
 python-input_output/*.json
 python-input_output/8-my_class*
+
+# Pickle, json, xml and csv files
+*.pkl
+*.json
+*.csv
+*.xml
