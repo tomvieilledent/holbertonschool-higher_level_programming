@@ -3,12 +3,12 @@
 
 
 def pascal_triangle(n):
-    """Returns a list of lists of integers representing Pascal's triangle"""
+    """Returns a list of lists representing Pascal's triangle"""
     if not isinstance(n, int):
         raise TypeError("n must be an integer")
     if n <= 0:
         return []
-    
+
     triangle = []
     for row in range(n):
         if row == 0:
@@ -16,9 +16,9 @@ def pascal_triangle(n):
         else:
             line = [1]
             for col in range(1, row):
-                line.append(triangle[row - 1][col - 1] + triangle[row - 1][col])
+                line.append(triangle[row - 1][col - 1] +
+                            triangle[row - 1][col])
             line.append(1)
         triangle.append(line)
-    
-    return triangle
 
+    return triangle

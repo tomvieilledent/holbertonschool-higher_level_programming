@@ -12,8 +12,9 @@ class Student:
         self.age = age
 
     def to_json(self, attrs=None):
-        """Returns a dictionary representation with optional attribute filtering."""
-        if attrs is None or not isinstance(attrs, list) or not all(isinstance(x, str) for x in attrs):
+        """Returns a dictionary representation with filtering."""
+        if attrs is None or not isinstance(attrs, list) or \
+           not all(isinstance(x, str) for x in attrs):
             return vars(self)
         obj_dict = vars(self)
         return {key: obj_dict[key] for key in attrs if key in obj_dict}

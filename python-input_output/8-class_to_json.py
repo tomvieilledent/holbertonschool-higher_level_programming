@@ -3,5 +3,5 @@
 
 
 def class_to_json(obj):
-    """Returns the dictionary description of an object for JSON serialization."""
+    """Returns the dictionary of an object for JSON serialization."""
     return vars(obj)
