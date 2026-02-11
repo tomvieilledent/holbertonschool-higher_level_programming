@@ -4,34 +4,33 @@ import pickle
 
 
 class CustomObject:
-    """Serializable object with age, name, and student status."""
+    """Serializable object with name, age, and student status."""
 
-    def __init__(self, age, name, is_student):
-        """Initialize with age (int), name (str), is_student (bool)."""
-        if type(age) is not int:
-            raise TypeError('age must be an int')
-        if type(name) is not str:
-            raise TypeError('name must be a str')
-        if type(is_student) is not bool:
-            raise TypeError('is_student must be a bool')
-
-        self.age = age
+    def __init__(self, name, age, is_student):
+        """Initialize object attributes."""
         self.name = name
+        self.age = age
         self.is_student = is_student
 
     def display(self):
-        """Print object attributes."""
-        file = vars(self)
-        for key in file:
-            print("{}: {}".format(key, file[key]))
+        """Print object attributes in required format."""
+        print(f"Name: {self.name}")
+        print(f"Age: {self.age}")
+        print(f"Is Student: {self.is_student}")
 
     def serialize(self, filename):
-        """Save object to file using pickle."""
-        with open(filename, 'wb') as file:
-            pickle.dump(self, file)
+        """Serialize object to file."""
+        try:
+            with open(filename, 'wb') as file:
+                pickle.dump(self, file)
+        except Exception:
+            return None
 
     @classmethod
     def deserialize(cls, filename):
-        """Load object from file using pickle."""
-        with open(filename, 'rb') as file:
-            return pickle.load(file)
+        """Deserialize object from file."""
+        try:
+            with open(filename, 'rb') as file:
+                return pickle.load(file)
+        except Exception:
+            return None
