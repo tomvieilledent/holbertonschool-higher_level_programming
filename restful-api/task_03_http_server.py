@@ -32,7 +32,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps(info).encode("utf-8"))
 
-        if self.path == "/status":
+        elif self.path == "/status":
             self.send_response(200)
             self.send_header("Content-type", 'text/plain')
             self.end_headers()
