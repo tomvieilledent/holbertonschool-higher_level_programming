@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Simple Flask API with in-memory users."""
 
 import json
 from flask import Flask, jsonify, request
@@ -6,25 +7,30 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-users = []
+users = {}
+
 
 @app.route('/')
 def home():
+    """Return API welcome message."""
     return 'Welcome to the Flask API!'
 
 
 @app.route('/data')
 def data():
+    """Return all users data."""
     return jsonify(users)
 
 
 @app.route('/status')
 def status():
+    """Return API status."""
     return ('OK')
 
 
 @app.route("/users/<username>")
 def get_user(username):
+    """Return a user by username."""
     if username in users:
         return users[username], 200
     return {"error": "User not found"}, 404
@@ -32,9 +38,10 @@ def get_user(username):
 
 @app.route("/add_user", methods=['POST'])
 def add_user():
+    """Add a new user from JSON payload."""
     try:
         user_data = json.loads(request.get_data())
-    except (TypeError):
+    except (TypeError, ValueError):
         return jsonify({"error": "Invalid JSON"}), 400
 
     if not user_data or "username" not in user_data:
