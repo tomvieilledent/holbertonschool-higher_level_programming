@@ -1,2 +1,2 @@
--- Compute the average score from second_table.
-SELECT AVG(score) AS average FROM second_table;
+-- List the number of records with the same score in second_table, sorted by count descending.
+SELECT score AS number FROM second_table GROUP BY score ORDER BY number DESC;
