@@ -24,9 +24,9 @@ def main():
 
     cursor.execute("""
         SELECT * FROM states
-        WHERE name = %s
+        WHERE name LIKE '{}'
         ORDER BY id ASC;
-        """, (state_searched,))
+        """.format(state_searched))
 
     states = cursor.fetchall()
 
