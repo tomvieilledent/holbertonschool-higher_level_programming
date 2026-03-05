@@ -22,7 +22,7 @@ def main():
     cursor = db.cursor()
 
     cursor.execute(
-        "SELECT * FROM states WHEN name LIKE 'N%' ORDER BY state.id ASC")
+        "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY state.id ASC")
 
     states = cursor.fetchall()
 
