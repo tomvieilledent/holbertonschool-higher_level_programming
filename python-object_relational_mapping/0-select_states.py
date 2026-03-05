@@ -21,7 +21,7 @@ def main():
 
     cursor = db.cursor()
 
-    cursor.execute("SELECT * FROM states ORDER BY id")
+    cursor.execute("SELECT * FROM states ORDER BY id ASC")
 
     states = cursor.fetchall()
 
