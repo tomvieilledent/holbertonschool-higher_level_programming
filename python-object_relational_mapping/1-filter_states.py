@@ -21,8 +21,14 @@ def main():
 
     cursor = db.cursor()
 
-    cursor.execute(
-        "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY states.id ASC")
+    cursor.execute("""
+        SELECT MIN(id), name
+        FROM states
+        WHERE name LIKE 'N%'
+        GROUP BY name
+        ORDER BY MIN(id) ASC;
+        """)
+                   
 
     states = cursor.fetchall()
 
