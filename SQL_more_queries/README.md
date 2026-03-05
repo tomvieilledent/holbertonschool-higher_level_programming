@@ -18,3 +18,6 @@ Scripts SQL du projet `SQL_more_queries`.
 - `11-genre_id_all_shows.sql`
 - `12-no_genre.sql`
 - `13-count_shows_by_genre.sql`
+- `14-my_genres.sql`
+- `15-comedy_only.sql`
+- `16-shows_by_genre.sql`
