@@ -24,7 +24,7 @@ def main():
 
     cursor.execute("""
         SELECT * FROM states
-        WHERE name LIKE '{}'
+        WHERE name = '{}'
         ORDER BY id ASC;
         """.format(state_searched,))
 
