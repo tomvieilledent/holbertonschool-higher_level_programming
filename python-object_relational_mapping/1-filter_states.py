@@ -5,8 +5,7 @@ import MySQLdb
 import sys
 
 
-def main():
-    """Run the SQL query and print results."""
+if __name__ == "__main__":
     user = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
@@ -21,12 +20,7 @@ def main():
 
     cursor = db.cursor()
 
-    cursor.execute(
-        "SELECT * FROM states "
-        "WHERE name LIKE BINARY 'N%' "
-        "ORDER BY states.id ASC"
-    )
-
+    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY states.id ASC")
     states = cursor.fetchall()
 
     for state in states:
@@ -36,5 +30,4 @@ def main():
     db.close()
 
 
-if __name__ == "__main__":
-    main()
+
