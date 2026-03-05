@@ -22,11 +22,9 @@ def main():
     cursor = db.cursor()
 
     cursor.execute("""
-        SELECT MIN(id), name
-        FROM states
-        WHERE name LIKE 'N%'
-        GROUP BY name
-        ORDER BY MIN(id) ASC;
+        SELECT * FROM states
+        WHERE name LIKE BINARY 'N%'
+        ORDER BY id ASC;
         """)
                    
 
