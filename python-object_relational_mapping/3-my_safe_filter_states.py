@@ -24,7 +24,7 @@ def main():
 
     cursor.execute("""
         SELECT * FROM states
-        WHERE name LIKE 'Arizona'
+        WHERE name LIKE %s
         ORDER BY id ASC;
         """, (state_searched,))
 
