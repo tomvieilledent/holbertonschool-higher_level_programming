@@ -16,12 +16,17 @@ def main():
         port=3306,
         user=username,
         passwd=password,
-        db=database
+        db=database,
     )
 
     cursor = db.cursor()
 
-    cursor.execute("SELECT * FROM states ORDER BY id ASC")
+    cursor.execute("""
+        SELECT * FROM cities
+        JOIN states ON cities.state_id=stateID
+        ORDER BY cities.id ASC
+        """)
+        
 
     states = cursor.fetchall()
 
