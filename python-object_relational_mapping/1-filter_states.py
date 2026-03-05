@@ -26,7 +26,6 @@ def main():
         WHERE name LIKE BINARY 'N%'
         ORDER BY id ASC;
         """)
-                   
 
     states = cursor.fetchall()
 
