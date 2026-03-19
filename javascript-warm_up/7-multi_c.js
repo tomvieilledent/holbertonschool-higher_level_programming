@@ -10,5 +10,5 @@ else
     {
     console.log('C is fun');
     i++;
-    }
+}
 }
