@@ -1,8 +1,8 @@
 #!/usr/bin/node
 
-const number = Number(process.argv[2]);
+const x = Number(process.argv[2]);
 
-if (!Number.isInteger(number) || number <= 0) console.log('Missing number of occurrences');
+if (!Number.isInteger(x) || x <= 0) console.log('Missing number of occurrences');
 else
 {
     let i = 0;
