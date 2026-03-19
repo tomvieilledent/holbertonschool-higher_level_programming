@@ -7,8 +7,7 @@ let i = 1;
 
 if (arg.length < 1) {
   console.log(0);
-}
-else {
+} else {
   while (i < arg.length) {
     if (arg[i] > max) {
       second = max;
