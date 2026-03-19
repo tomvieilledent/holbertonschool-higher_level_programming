@@ -1,9 +1,9 @@
 #!/usr/bin/node
 
-const x = Number(process.argv[2]);
+const x = parseInt(process.argv[2]);
 
-if (!Number.isInteger(x) || x <= 0) console.log('Missing number of occurrences');
-else
+if (isNaN(x)) console.log('Missing number of occurrences');
+else 
 {
     let i = 0;
     while (i < x) 
