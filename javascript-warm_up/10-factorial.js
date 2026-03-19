@@ -1,14 +1,11 @@
 #!/usr/bin/node
-const a = parseInt(process.argv[2]);
 
-if (isNaN(a) || a < 0) console.log(1);
-else if (a === 0 || a === 1) console.log(1);
-else {
-  let total = 1;
-  let num = 1;
-  while (num <= a) {
-    total *= num;
-    num++;
+function factorial (n) {
+  if (isNaN(n) || n <= 1) {
+    return 1;
   }
-  console.log(total);
+  return n * factorial(n - 1);
 }
+
+const n = parseInt(process.argv[2], 10);
+console.log(factorial(n));
