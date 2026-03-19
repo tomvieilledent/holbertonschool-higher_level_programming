@@ -18,5 +18,5 @@ if (arg.length < 1) {
     }
     i++;
   }
-  console.log(second);
+  console.log(second === -Infinity ? 0 : second);
 }
