@@ -6,11 +6,11 @@ let second = 0;
 let i = 1;
 
 if (arg.length < 1) {
-  console.log('0');
+  console.log(0);
 }
 else {
   while (i < arg.length) {
-    if (arg[i] >= max) {
+    if (arg[i] > max) {
       second = max;
       max = arg[i];
     }
