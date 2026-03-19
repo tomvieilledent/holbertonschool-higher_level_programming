@@ -1,11 +1,11 @@
 #!/usr/bin/node
 
 const arg = process.argv.slice(2).map(Number);
-let max = -Infinity;
-let second = -Infinity;
-let i = 1;
+let max = 0;
+let second = 0;
+let i = 0;
 
-if (arg.length < 2) {
+if (arg.length < 1) {
   console.log(0);
 } else {
   while (i < arg.length) {
@@ -18,5 +18,5 @@ if (arg.length < 2) {
     }
     i++;
   }
-  console.log(second === -Infinity ? 0 : second);
+  console.log(second);
 }
