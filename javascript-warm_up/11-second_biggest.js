@@ -1,8 +1,8 @@
 #!/usr/bin/node
 
 const arg = process.argv.slice(2).map(Number);
-let max = 0;
-let second = 0;
+let max = -Infinity;
+let second = -Infinity;
 let i = 0;
 
 if (arg.length < 1) {
