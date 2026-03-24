@@ -14,9 +14,10 @@ python-input_output/8-my_class*
 
 # Pickle, json, xml and csv files
 *.pkl
-*.json
 *.csv
 *.xml
+
+
 python-object_relational_mapping/.venv/lib64
 python-object_relational_mapping/.venv/pyvenv.cfg
 python-object_relational_mapping/.venv/bin/activate
