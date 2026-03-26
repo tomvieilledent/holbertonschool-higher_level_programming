@@ -10,15 +10,17 @@ def home():
     """render the homepage"""
     return render_template('index.html')
 
+
 @app.route('/about')
 def about():
-       """render the about"""
-       return render_template('about.html')
+    """render the about"""
+    return render_template('about.html')
+
 
 @app.route('/contact')
 def contact():
-       """render the contact"""
-       return render_template('contact.html')
+    """render the contact"""
+    return render_template('contact.html')
 
 
 if __name__ == '__main__':
