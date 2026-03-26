@@ -1,36 +1,41 @@
 #!/usr/bin/python3
-
 from flask import Flask, render_template
 import json
-from pathlib import Path
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template('index.html')
+    """Render the home page."""
+    return render_template("index.html")
 
 
 @app.route('/about')
 def about():
+    """Render the about page."""
     return render_template('about.html')
 
 
 @app.route('/contact')
 def contact():
+    """Render the contact page."""
     return render_template('contact.html')
 
 
 @app.route('/items')
 def items():
-    base_dir = Path(__file__).resolve().parent
-    items_path = base_dir / 'items.json'
-    with open(items_path, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    item = data.get('items', [])
-    return render_template('items.html', items=item)
+    """Render the items page with data from items.json."""
+    try:
+        with open('items.json', 'r') as file:
+            items_data = json.load(file)
+        items_list = items_data.get("items", [])
+    except FileNotFoundError:
+        items_list = []
+    except json.JSONDecodeError:
+        items_list = []
+    return render_template('items.html', items=items_list)
 
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5050)
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
