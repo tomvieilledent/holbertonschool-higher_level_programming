@@ -1,1 +1,1 @@
-Réponse 6
+True
